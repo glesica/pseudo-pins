@@ -38,6 +38,19 @@ function resetStorage() {
     chrome.storage.sync.clear(loadPatterns);
 }
 
+function setIcon(disabled) {
+    var mod = '';
+    if (disabled) {
+        mod = '-light';
+    }
+    chrome.browserAction.setIcon({
+        path: {
+            19: 'icon19' + mod + '.png',
+            38: 'icon38' + mod + '.png'
+        }
+    });
+}
+
 function loadDisabledState() {
     var disabledCheck = document.getElementById('disabled');
     chrome.storage.sync.get({
@@ -45,6 +58,7 @@ function loadDisabledState() {
     }, function(items) {
         var disabled = items['disabled'];
         disabledCheck.checked = disabled;
+        setIcon(disabled);
     });
 }
 
@@ -52,6 +66,8 @@ function saveDisabledState() {
     var disabledCheck = document.getElementById('disabled');
     chrome.storage.sync.set({
         'disabled': disabledCheck.checked
+    }, function() {
+        setIcon(disabledCheck.checked);
     });
 }
 
