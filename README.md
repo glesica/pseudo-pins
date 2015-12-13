@@ -1,3 +1,5 @@
+![Icon](icon32.png)
+
 # Pseudo Pins
 
 A Chrome extension that automatically rearranges tabs based on a set of regular
@@ -6,6 +8,8 @@ built into Chrome since tabs that match a given expression are moved as far to
 the left as possible and grouped together.
 
 The extension attempts, within reason, to maintain its arrangements.
+
+![Screenshot](screenshot0.png)
 
 ## Credits
 
