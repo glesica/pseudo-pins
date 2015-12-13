@@ -19,7 +19,9 @@ function loadPatterns() {
 }
 
 function rearrangeTabs() {
-    chrome.tabs.query({}, function(tabs) {
+    chrome.tabs.query({
+        currentWindow: true
+    }, function(tabs) {
         // We can't move anything to the left of the pinned
         // tabs, so figure out how many there are, that is
         // our left-most target index.
@@ -35,6 +37,9 @@ function rearrangeTabs() {
             var pattern = patterns[i];
             for (var j = 0; j < tabs.length; j++) {
                 var tab = tabs[j];
+                if (tab.pinned) {
+                    continue
+                }
                 if (tab.url.match(pattern)) {
                     if (tab.index != targetIndex) {
                         chrome.tabs.move(tab.id, {
