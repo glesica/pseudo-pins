@@ -1,78 +1,83 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Pseudo Pins Popup</title>
-    <style>
-      body {
-          color: #333333;
-          font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-          font-size: 0.8em;
-      }
+    <head>
+        <title>Pseudo Pins Popup</title>
+        <style>
+body {
+    color: #333333;
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 0.8em;
+}
 
-      h1 {
-          display: inline-block;
-          margin: 0 0 12px 0;
-      }
+h1 {
+    display: inline-block;
+    margin: 0 0 12px 0;
+}
 
-      p {
-          margin: 0 0 12px 0;
-      }
+p {
+    margin: 0 0 12px 0;
+}
 
-      img {
-          display: inline-block;
-          margin-right: 3px;
-          vertical-align: text-bottom;
-      }
+img {
+    display: inline-block;
+    margin-right: 3px;
+    vertical-align: text-bottom;
+}
 
-      label {
-          font-weight: bold;
-      }
+label {
+    font-weight: bold;
+}
 
-      button {
-          color: #333333;
-      }
+button {
+    color: #333333;
+}
 
-      #form {
-          overflow: hidden;
-          max-width: 400px;
-      }
+#form {
+    overflow: hidden;
+    max-width: 400px;
+}
 
-      #patterns {
-          color: #333333;
-          font-size: 1.0em;
-          height: 150px;
-          max-width: 380px;
-          width: 300px;
-      }
+#patterns {
+    color: #333333;
+    font-size: 1.0em;
+    height: 150px;
+    max-width: 380px;
+    width: 300px;
+}
 
-      #reset {
-          float: right;
-      }
-    </style>
+#reset {
+    float: right;
+}
+        </style>
 
-    <script src="popup.js"></script>
-  </head>
-  <body>
-      <div id="header">
-          <img src="icon32.png" alt="Icon">
-          <h1>Pseudo Pins</h1>
-      </div>
-      <div id="help">
-          <p>Enter one or more URL patterns below, one per line.
-          Each pattern will be treated as a JS regular expression.
-          Tabs will be grouped in the same order as they are
-          listed here.</p>
-          <p>For example, "^https://github.com" would
-          group all GitHub tabs together.</p>
-          <p><em>Remember to hit "Save" when you're finished.</em></p>
-      </div>
-      <div id="form">
-          <label for="patterns">URL Patterns</label>
-          <textarea id="patterns"></textarea>
-          <button id="save" title="Save the current patterns.">Save</button>
-          <button id="reload" title="Discard unsaved changes.">Reload</button>
-          <button id="reset" title="Reset to default patterns.">Reset to Default</button>
-      </div>
-  </body>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="icon32.png" alt="Icon">
+            <h1>Pseudo Pins</h1>
+        </div>
+        <div id="help">
+            <p>Enter one or more URL patterns below, one per line.
+            Each pattern will be treated as a JS regular expression.
+            Tabs will be grouped in the same order as they are
+            listed here.</p>
+            <p>For example, "^https://github.com" would
+            group all GitHub tabs together.</p>
+            <p><em>Remember to hit "Save" when you're finished.</em></p>
+        </div>
+        <div id="form">
+            <p>
+                <label>
+                    <input id="disabled" type="checkbox">Disable
+                </label>
+            </p>
+            <label for="patterns">URL Patterns</label>
+            <textarea id="patterns"></textarea>
+            <button id="save" title="Save the current patterns.">Save</button>
+            <button id="reload" title="Discard unsaved changes.">Reload</button>
+            <button id="reset" title="Reset to default options.">Reset to Default</button>
+        </div>
+    </body>
 </html>
 

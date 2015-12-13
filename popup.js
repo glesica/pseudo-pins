@@ -3,6 +3,8 @@ var defaultPatterns = [
     '^https://gist.github.com'
 ];
 
+var currentPatternsContent;
+
 function loadPatterns() {
     var patternsBox = document.getElementById('patterns');
     chrome.storage.sync.get({
@@ -14,6 +16,7 @@ function loadPatterns() {
         } else {
             patternsBox.value = patterns.join('\r\n');
         }
+        currentPatternsContent = patternsBox.value;
     });
 }
 
@@ -27,14 +30,35 @@ function savePatterns() {
     chrome.storage.sync.set({
         'patterns': patterns
     });
+    currentPatternsContent = patternsBox.value;
+    patternsBox.style.background = '';
 }
 
-function resetPatterns() {
+function resetStorage() {
     chrome.storage.sync.clear(loadPatterns);
+}
+
+function loadDisabledState() {
+    var disabledCheck = document.getElementById('disabled');
+    chrome.storage.sync.get({
+        'disabled': false
+    }, function(items) {
+        var disabled = items['disabled'];
+        disabledCheck.checked = disabled;
+    });
+}
+
+function saveDisabledState() {
+    var disabledCheck = document.getElementById('disabled');
+    chrome.storage.sync.set({
+        'disabled': disabledCheck.checked
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     loadPatterns();
+    loadDisabledState();
+
     var saveButton = document.getElementById('save');
     saveButton.addEventListener('click', savePatterns);
 
@@ -42,6 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
     reloadButton.addEventListener('click', loadPatterns);
 
     var resetButton = document.getElementById('reset');
-    resetButton.addEventListener('click', resetPatterns);
+    resetButton.addEventListener('click', resetStorage);
+
+    var disabledCheck = document.getElementById('disabled');
+    disabledCheck.addEventListener('change', saveDisabledState);
+
+    var patternsBox = document.getElementById('patterns');
+    patternsBox.addEventListener('input', function(e) {
+        if (e.target.value != currentPatternsContent) {
+            e.target.style.background = '#ffeeee';
+        } else {
+            e.target.style.background = '';
+        }
+    });
 });
 

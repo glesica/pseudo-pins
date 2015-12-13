@@ -1,11 +1,17 @@
 var patterns;
+var disabled;
 
 function addListeners() {
     chrome.tabs.onUpdated.addListener(rearrangeTabs);
     chrome.tabs.onAttached.addListener(rearrangeTabs);
     chrome.tabs.onCreated.addListener(rearrangeTabs);
     chrome.storage.onChanged.addListener(function(changes) {
-        patterns = changes['patterns']['newValue'];
+        if (changes.hasOwnProperty('patterns')) {
+            patterns = changes['patterns']['newValue'];
+        }
+        if (changes.hasOwnProperty('disabled')) {
+            disabled = changes['disabled']['newValue'];
+        }
         rearrangeTabs();
     });
 }
@@ -18,7 +24,18 @@ function loadPatterns() {
     });
 }
 
+function loadDisabledState() {
+    chrome.storage.sync.get({
+        'disabled': false
+    }, function(items) {
+        disabled = items['disabled'];
+    });
+}
+
 function rearrangeTabs() {
+    if (disabled) {
+        return;
+    }
     chrome.tabs.query({
         currentWindow: true
     }, function(tabs) {
@@ -55,5 +72,6 @@ function rearrangeTabs() {
 }
 
 loadPatterns();
+loadDisabledState();
 addListeners();
 
