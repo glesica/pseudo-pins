@@ -45,8 +45,8 @@ function setIcon(disabled) {
     }
     chrome.browserAction.setIcon({
         path: {
-            19: 'icon19' + mod + '.png',
-            38: 'icon38' + mod + '.png'
+            19: 'icons/icon19' + mod + '.png',
+            38: 'icons/icon38' + mod + '.png'
         }
     });
 }
