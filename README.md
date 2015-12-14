@@ -1,4 +1,4 @@
-![Icon](icon32.png)
+![Icon](icons/icon32.png)
 
 # Pseudo Pins
 
