@@ -1,0 +1,68 @@
+body {
+    color: #333333;
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 0.8em;
+}
+
+p {
+    margin: 0 0 12px 0;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    color: #333333;
+}
+
+/* Header */
+
+#header {
+    align-items: center;
+    display: flex;
+    margin-bottom: 12px;
+}
+
+#header #icon {
+    margin-right: 6px;
+}
+
+#header h1 {
+    flex-grow: 1;
+    margin: 0;
+}
+
+#header #help-toggle img {
+    height: 19px;
+    width: 19px;
+}
+
+/* Help */
+
+#help {
+    display: none;
+}
+
+#help h2 {
+    margin: 0 0 6px 0;
+}
+
+/* Form */
+
+#form {
+    overflow: hidden;
+    max-width: 400px;
+}
+
+#patterns {
+    color: #333333;
+    font-size: 1.0em;
+    height: 150px;
+    max-width: 380px;
+    width: 300px;
+}
+
+#reset {
+    float: right;
+}

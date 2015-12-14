@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var resetButton = document.getElementById('reset');
     resetButton.addEventListener('click', resetStorage);
 
+    var helpToggle = document.getElementById('help-toggle');
+    helpToggle.addEventListener('click', function() {
+        var helpSection = document.getElementById('help');
+        if (helpSection.style.display == '') {
+            helpSection.style.display = 'block';
+        } else {
+            helpSection.style.display = '';
+        }
+    });
+
     var disabledCheck = document.getElementById('disabled');
     disabledCheck.addEventListener('change', saveDisabledState);
 

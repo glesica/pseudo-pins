@@ -15,6 +15,9 @@ The extension attempts, within reason, to maintain its arrangements.
 
 Extension created by George Lesica (<george@lesica.com>).
 
-Icon created by [Joe Harrison](https://thenounproject.com/joe_harrison/).
-Retrieved from The Noun Project, licensed CC-BY.
+Pin icon created by [Joe Harrison](https://thenounproject.com/joe_harrison/).
+Retrieved from The Noun Project and modified, licensed CC-BY.
 
+Question mark icon created by [Mateo
+Zlatar](https://thenounproject.com/mateozlatar/). Retrieved from The Noun
+Project, licensed CC-BY.
