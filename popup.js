@@ -36,6 +36,7 @@ function savePatterns() {
 
 function resetStorage() {
     chrome.storage.sync.clear(loadPatterns);
+    chrome.storage.local.clear(loadDisabledState);
 }
 
 function setIcon(disabled) {
@@ -53,7 +54,7 @@ function setIcon(disabled) {
 
 function loadDisabledState() {
     var disabledCheck = document.getElementById('disabled');
-    chrome.storage.sync.get({
+    chrome.storage.local.get({
         'disabled': false
     }, function(items) {
         var disabled = items['disabled'];
@@ -64,7 +65,7 @@ function loadDisabledState() {
 
 function saveDisabledState() {
     var disabledCheck = document.getElementById('disabled');
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         'disabled': disabledCheck.checked
     }, function() {
         setIcon(disabledCheck.checked);
