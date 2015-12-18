@@ -54,10 +54,19 @@ function rearrangeTabs() {
             var pattern = patterns[i];
             for (var j = 0; j < tabs.length; j++) {
                 var tab = tabs[j];
+                // Do not move a second time. This preserves
+                // the precedence of the patterns.
+                if (tab.inPosition === true) {
+                    continue;
+                }
+                // Ignore pinned tabs since we can't move
+                // them anyway and we already accounted
+                // for them above.
                 if (tab.pinned) {
-                    continue
+                    continue;
                 }
                 if (tab.url.match(pattern)) {
+                    tab.inPosition = true;
                     if (tab.index != targetIndex) {
                         chrome.tabs.move(tab.id, {
                             index: targetIndex++
