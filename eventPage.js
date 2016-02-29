@@ -52,28 +52,40 @@ function rearrangeTabs() {
 
         for (var i = 0; i < patterns.length; i++) {
             var pattern = patterns[i];
-            for (var j = 0; j < tabs.length; j++) {
-                var tab = tabs[j];
-                // Do not move a second time. This preserves
-                // the precedence of the patterns.
-                if (tab.inPosition === true) {
-                    continue;
-                }
+            var patternTabs = tabs.filter(function(tab) {
                 // Ignore pinned tabs since we can't move
                 // them anyway and we already accounted
                 // for them above.
                 if (tab.pinned) {
-                    continue;
+                    return false;
                 }
-                if (tab.url.match(pattern)) {
-                    tab.inPosition = true;
-                    if (tab.index != targetIndex) {
-                        chrome.tabs.move(tab.id, {
-                            index: targetIndex++
-                        });
-                    } else {
-                        targetIndex += 1;
-                    }
+                if (tab.inPosition === true) {
+                    return false;
+                }
+                return tab.url.match(pattern);
+            });
+            patternTabs.sort(function(leftTab, rightTab) {
+                var left = leftTab.title;
+                var right = rightTab.title;
+                if (left < right) {
+                    return -1;
+                }
+                if (left === right) {
+                    return 0;
+                }
+                if (left > right) {
+                    return 1;
+                }
+            });
+            for (var j = 0; j < patternTabs.length; j++) {
+                var tab = patternTabs[j];
+                tab.inPosition = true;
+                if (tab.index != targetIndex) {
+                    chrome.tabs.move(tab.id, {
+                        index: targetIndex++
+                    });
+                } else {
+                    targetIndex += 1;
                 }
             }
         }
