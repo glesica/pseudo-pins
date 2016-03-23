@@ -67,11 +67,27 @@ function rearrangeTabs() {
             patternTabs.sort(function(leftTab, rightTab) {
                 var left = leftTab.title;
                 var right = rightTab.title;
+                // We can't allow ties, so we sort first on title, then on ID,
+                // then, finally, on current index. ID should only be the same
+                // for special windows like apps and devtools.
                 if (left < right) {
                     return -1;
                 }
                 if (left === right) {
-                    return 0;
+                    if (leftTab.id < rightTab.id) {
+                        return -1;
+                    }
+                    if (leftTab.id === rightTab.id) {
+                        if (leftTab.index < rightTab.index) {
+                            return -1;
+                        }
+                        if (leftTab.index > rightTab.index) {
+                            return 1;
+                        }
+                    }
+                    if (leftTab.id > rightTab.id) {
+                        return 1;
+                    }
                 }
                 if (left > right) {
                     return 1;
