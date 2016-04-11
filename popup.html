@@ -22,6 +22,10 @@
             in the same order as they are listed here.</p>
             <p>For example, "^https://github.com" would
             group all GitHub tabs together.</p>
+            <p>Set the Ignore Prefix to a regular expression that should be
+            ignored when sorting tabs. For example, for GitHub pull requests,
+            something like "\([0-9]+\)[ ]*" would keep tabs from being
+            reordered when there are unread comments.</p>
             <p><em>Remember to hit "Save" when you're finished.</em></p>
         </div>
         <div id="form">
@@ -30,8 +34,14 @@
                     <input id="disabled" type="checkbox">Disable
                 </label>
             </p>
-            <label for="patterns">URL Patterns</label>
-            <textarea id="patterns"></textarea>
+            <p>
+                <label for="patterns">URL Patterns</label>
+                <textarea id="patterns"></textarea>
+            </p>
+            <p>
+                <label for="ignore-prefix">Ignore Prefix</label>
+                <input id="ignore-prefix" type="text" />
+            </p>
             <button id="save" title="Save the current patterns.">Save</button>
             <button id="reload" title="Discard unsaved changes.">Reload</button>
             <button id="reset" title="Reset to default options.">Reset to Default</button>

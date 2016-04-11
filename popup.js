@@ -4,6 +4,7 @@ var defaultPatterns = [
 ];
 
 var currentPatternsContent;
+var currentIgnorePrefix;
 
 function loadPatterns() {
     var patternsBox = document.getElementById('patterns');
@@ -17,6 +18,16 @@ function loadPatterns() {
             patternsBox.value = patterns.join('\r\n');
         }
         currentPatternsContent = patternsBox.value;
+    });
+
+    // Ignore prefix
+    var ignorePrefixBox = document.getElementById('ignore-prefix');
+    chrome.storage.sync.get({
+        'ignorePrefix': ''
+    }, function(items) {
+        var ignorePrefix = items['ignorePrefix'];
+        ignorePrefixBox.value = ignorePrefix;
+        currentIgnorePrefix = ignorePrefixBox.value;
     });
 }
 
@@ -32,6 +43,15 @@ function savePatterns() {
     });
     currentPatternsContent = patternsBox.value;
     patternsBox.style.background = '';
+
+    // Ignore prefix
+    var ignorePrefixBox = document.getElementById('ignore-prefix');
+    var ignorePrefix = ignorePrefixBox.value;
+    chrome.storage.sync.set({
+        'ignorePrefix': ignorePrefix
+    });
+    currentIgnorePrefix = ignorePrefixBox.value;
+    ignorePrefixBox.style.background = '';
 }
 
 function resetStorage() {
@@ -101,6 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var patternsBox = document.getElementById('patterns');
     patternsBox.addEventListener('input', function(e) {
         if (e.target.value != currentPatternsContent) {
+            e.target.style.background = '#ffeeee';
+        } else {
+            e.target.style.background = '';
+        }
+    });
+
+    var ignorePrefixBox = document.getElementById('ignore-prefix');
+    ignorePrefixBox.addEventListener('input', function(e) {
+        if (e.target.value != currentIgnorePrefix) {
             e.target.style.background = '#ffeeee';
         } else {
             e.target.style.background = '';
