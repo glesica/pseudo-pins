@@ -42,6 +42,8 @@ button {
 
 #help {
     display: none;
+    max-height: 150px;
+    overflow-y: scroll;
 }
 
 #help h2 {
