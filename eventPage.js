@@ -1,4 +1,5 @@
 var patterns;
+var ignorePrefix;
 var disabled;
 
 function addListeners() {
@@ -18,9 +19,15 @@ function addListeners() {
 
 function loadPatterns() {
     chrome.storage.sync.get({
-        'patterns': []
+        'patterns': [],
+        'ignorePrefix': ''
     }, function(items) {
         patterns = items['patterns'];
+        if (items['ignorePrefix'] !== '') {
+            ignorePrefix = RegExp(items['ignorePrefix']);
+        } else {
+            ignorePrefix = null;
+        }
     });
 }
 
@@ -65,8 +72,8 @@ function rearrangeTabs() {
                 return tab.url.match(pattern);
             });
             patternTabs.sort(function(leftTab, rightTab) {
-                var left = leftTab.title;
-                var right = rightTab.title;
+                var left = leftTab.title.replace(ignorePrefix, '');
+                var right = rightTab.title.replace(ignorePrefix, '');
                 // We can't allow ties, so we sort first on title, then on ID,
                 // then, finally, on current index. ID should only be the same
                 // for special windows like apps and devtools.
