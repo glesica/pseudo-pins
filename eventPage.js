@@ -2,8 +2,20 @@ var patterns;
 var ignorePrefix;
 var disabled;
 
+var isTimerSet = false;
+var debounceTime = 1000;
+
 function addListeners() {
-    chrome.tabs.onUpdated.addListener(rearrangeTabs);
+    chrome.tabs.onUpdated.addListener(function() {
+        if (isTimerSet) {
+            return;
+        }
+        isTimerSet = true;
+        setTimeout(function() {
+            rearrangeTabs();
+            isTimerSet = false;
+        }, debounceTime);
+    });
     chrome.tabs.onAttached.addListener(rearrangeTabs);
     chrome.tabs.onCreated.addListener(rearrangeTabs);
     chrome.storage.onChanged.addListener(function(changes) {
