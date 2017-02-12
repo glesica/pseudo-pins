@@ -9,6 +9,19 @@ the left as possible and grouped together.
 
 The extension attempts, within reason, to maintain its arrangements.
 
+## Building
+
+Version 2 is being rewritten in Dart. You'll need a working
+[Dart](https://www.dartlang.org/) tool chain to build it. Once you've got that,
+you can build the extension easily:
+
+```
+pub build extension
+```
+
+The JavaScript files and everything else needed to use the extension in Chrome
+will end up in `build/extension`.
+
 ![Screenshot](screenshot0.png)
 
 ## Credits
