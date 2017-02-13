@@ -12,7 +12,6 @@ dependencies:
   dart_to_js_script_rewriter: ^1.0.0
   react: ^3.0.0
   w_flux: ^2.6.0
-  w_module: ^1.0.0
   over_react: ^1.4.0
   w_common: ^1.2.0
   uuid: ^0.5.3

@@ -433,12 +433,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
-  w_module:
-    description:
-      name: w_module
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   watcher:
     description:
       name: watcher

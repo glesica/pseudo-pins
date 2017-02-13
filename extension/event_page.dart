@@ -10,7 +10,7 @@ Future<Null> sortTabs() async {
   var tabs = await chromeProxy.getCurrentTabs();
   var sortedTabs = <chrome.Tab>[];
   for (var matcher in state.tabMatchers) {
-    if (matcher.isBlank) {
+    if (matcher.isBlank || !matcher.isEnabled) {
       continue;
     }
 

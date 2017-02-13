@@ -17,6 +17,7 @@ class MatcherItemProps extends UiProps {
 class MatcherItemState extends UiState {
   String pattern;
   String ignorePrefix;
+  bool isEnabled;
 }
 
 @Component()
@@ -26,7 +27,8 @@ class MatcherItemComponent
   Map getInitialState() {
     return (newState()
       ..pattern = props.matcher.pattern
-      ..ignorePrefix = props.matcher.ignorePrefix);
+      ..ignorePrefix = props.matcher.ignorePrefix
+      ..isEnabled = props.matcher.isEnabled);
   }
 
   @override
@@ -35,6 +37,18 @@ class MatcherItemComponent
       ..key = props.matcher.id
       ..className = 'matcher-item')(
         _patternField(), _ignorePrefixField(), _matcherControls());
+  }
+
+  dynamic _enabledButton() {
+    var label = props.matcher.isEnabled ? 'Disable' : 'Enable';
+    return (Dom.button()
+      ..key = 'button-enabled'
+      ..onClick = (SyntheticMouseEvent event) {
+        final updatedMatcher = new TabMatcher.updated(props.matcher,
+            isEnabled: !props.matcher.isEnabled);
+        setState(newState()..isEnabled = updatedMatcher.isEnabled);
+        props.actions.updateTabMatcher(updatedMatcher);
+      })(label);
   }
 
   dynamic _patternField() {
@@ -54,7 +68,7 @@ class MatcherItemComponent
     return (Dom.input()
       ..key = 'ignore-prefix'
       ..value = state.ignorePrefix
-      ..placeholder = 'Prefix to ignore...'
+      ..placeholder = 'Title prefix to ignore...'
       ..onChange = (SyntheticFormEvent event) {
         final updatedMatcher = new TabMatcher.updated(props.matcher,
             ignorePrefix: event.target.value);
@@ -64,7 +78,7 @@ class MatcherItemComponent
   }
 
   dynamic _matcherControls() {
-    return (Dom.div()..key = 'controls')(_testButton(), _removeButton());
+    return (Dom.div()..key = 'controls')(_enabledButton(), _removeButton());
   }
 
   dynamic _removeButton() {
