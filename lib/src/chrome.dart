@@ -4,6 +4,8 @@ import 'package:chrome/chrome_ext.dart' as chrome;
 import 'package:pseudo_pins/src/state.dart';
 import 'package:w_common/disposable.dart';
 
+import 'package:pseudo_pins/constants.dart';
+
 final ChromeProxy chromeProxy = new BrowserProxy();
 
 /// A proxy interface that provides everything needed to manipulate
@@ -54,18 +56,18 @@ class BrowserProxy extends Disposable implements ChromeProxy {
 
   @override
   Future<PseudoState> loadState() async {
-    Map json = await chrome.storage.sync.get({'state': null});
+    Map json = await chrome.storage.sync.get({stateKey: null});
 
     if (json == null) {
       return new PseudoState();
     }
 
-    return new PseudoState.fromJson(json['state']);
+    return new PseudoState.fromJson(json[stateKey]);
   }
 
   @override
   Future<Null> persistState(PseudoState state) async {
-    await chrome.storage.sync.set({'state': state.toJson()});
+    await chrome.storage.sync.set({stateKey: state.toJson()});
   }
 }
 

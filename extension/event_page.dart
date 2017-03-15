@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:chrome/chrome_ext.dart' as chrome;
 
-import 'package:pseudo_pins/src/chrome.dart';
+import 'package:pseudo_pins/pseudo_pins.dart';
+import 'package:pseudo_pins/constants.dart';
 
 // TODO: Break this up into 2-3 functions to faciliate testing.
 Future<Null> sortTabs() async {
@@ -73,5 +74,11 @@ void main() {
     sortTabs();
   })..onUpdated.listen((_) {
     sortTabs();
+  });
+
+  chrome.storage.onChanged.listen((chrome.StorageOnChangedEvent event) {
+    if (event.changes.containsKey(stateKey)) {
+      sortTabs();
+    }
   });
 }
